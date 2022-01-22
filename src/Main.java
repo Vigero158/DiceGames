@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Dice d4 = new Dice(4);
@@ -6,6 +8,7 @@ public class Main {
         Dice d10 = new Dice(10);
         Dice d12 = new Dice(12);
         Dice d20 = new Dice(20);
+        Dice[] dice = new Dice[]{d4, d6, d8, d10, d12, d20};
 
         System.out.println("""
                 The goal of the game is to roll the max number on each dice (d4, d6, d8, d10, d12, and d20) and move on to each subsequent die.
@@ -13,68 +16,15 @@ public class Main {
                 For example, if you roll a 4 on a d4 you can move on to a d6 and if you roll anything below a 6 you must start over from the d4.""");
         Thread.sleep(5000);
         System.out.println("The game will begin now.");
-        System.out.println();
         Thread.sleep(2000);
 
-        while (!d4.getIsCorrect() && !d6.getIsCorrect() && !d8.getIsCorrect() && !d10.getIsCorrect() && !d12.getIsCorrect() && !d20.getIsCorrect()) {
-            d4.roll();
-            d4.printRoll();
-            if (d4.getCurrentRoll() == d4.getSideNumber()) {
-                d4.setIsCorrect(true);
-                d6.roll();
-                d6.printRoll();
-                if (d6.getCurrentRoll() == d6.getSideNumber()) {
-                    d6.setIsCorrect(true);
-                    d8.roll();
-                    d8.printRoll();
-                    if (d8.getCurrentRoll() == d8.getSideNumber()) {
-                        d8.setIsCorrect(true);
-                        d10.roll();
-                        d10.printRoll();
-                        if (d10.getCurrentRoll() == d10.getSideNumber()) {
-                            d10.setIsCorrect(true);
-                            d12.roll();
-                            d12.printRoll();
-                            if (d12.getCurrentRoll() == d12.getSideNumber()) {
-                                d12.setIsCorrect(true);
-                                d20.roll();
-                                d20.printRoll();
-                                if (d20.getCurrentRoll() == d20.getSideNumber()) {
-                                    d20.setIsCorrect(true);
-                                } else {
-                                    d4.setIsCorrect(false);
-                                    d6.setIsCorrect(false);
-                                    d8.setIsCorrect(false);
-                                    d10.setIsCorrect(false);
-                                    d12.setIsCorrect(false);
-                                    continue;
-                                }
-
-                            } else {
-                                d4.setIsCorrect(false);
-                                d6.setIsCorrect(false);
-                                d8.setIsCorrect(false);
-                                d10.setIsCorrect(false);
-                                continue;
-
-                            }
-                        } else {
-                            d4.setIsCorrect(false);
-                            d6.setIsCorrect(false);
-                            d8.setIsCorrect(false);
-                            continue;
-                        }
-                    } else {
-                        d4.setIsCorrect(false);
-                        d6.setIsCorrect(false);
-                        continue;
-                    }
-                } else {
-                    System.out.println("Resetting rolls.");
-                    System.out.println();
-                    d4.setIsCorrect(false);
-                    continue;
-                }
+        for (int i = 0; i < dice.length; ) {
+            dice[i].roll();
+            dice[i].printRoll();
+            if (dice[i].getCurrentRoll() == dice[i].getSideNumber()) {
+                i++;
+            } else {
+                i = 0;
             }
         }
         System.out.println();
