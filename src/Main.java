@@ -13,6 +13,7 @@ public class Main {
                 For example, if you roll a 4 on a d4 you can move on to a d6 and if you roll anything below a 6 you must start over from the d4.""");
         Thread.sleep(5000);
         System.out.println("The game will begin now.");
+        System.out.println();
         Thread.sleep(2000);
 
         while (!d4.getIsCorrect() && !d6.getIsCorrect() && !d8.getIsCorrect() && !d10.getIsCorrect() && !d12.getIsCorrect() && !d20.getIsCorrect()) {
