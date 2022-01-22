@@ -29,14 +29,6 @@ public class Dice {
         System.out.println("Roll: " + currentRoll);
     }
 
-    public void setIsCorrect(Boolean x) {
-        isCorrect = x;
-    }
-
-    public Boolean getIsCorrect() {
-        return isCorrect;
-    }
-
     public int getSideNumber() {
         return sideNumber;
     }
