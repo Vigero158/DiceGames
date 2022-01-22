@@ -1,5 +1,4 @@
 public class Main {
-
     public static void main(String[] args) throws InterruptedException {
         Dice d4 = new Dice(4);
         Dice d6 = new Dice(6);
@@ -16,104 +15,80 @@ public class Main {
         System.out.println("The game will begin now.");
         Thread.sleep(2000);
 
-        while (true) {
-            while (!d4.getIsCorrect()) {
-                d4.roll();
-                d4.printRoll();
-                // Thread.sleep(1000);
-                if (d4.getCurrentRoll() == d4.getSideNumber()) {
-                    d4.setIsCorrect(true);
-                }
-                while (!d6.getIsCorrect() && d4.getIsCorrect()) {
-                    d6.roll();
-                    d6.printRoll();
-                    // Thread.sleep(1000);
-                    if (d6.getCurrentRoll() == d6.getSideNumber()) {
-                        d6.setIsCorrect(true);
-                    } else {
-                        System.out.println("Resetting rolls.");
-                        System.out.println();
-                        d4.setIsCorrect(false);
-                        break;
-                    }
-                    while (!d8.getIsCorrect() && d6.getIsCorrect()) {
-                        d8.roll();
-                        d8.printRoll();
-                        // Thread.sleep(1000);
-                        if (d8.getCurrentRoll() == d8.getSideNumber()) {
-                            d8.setIsCorrect(true);
-                        } else {
-                            System.out.println("Resetting rolls.");
-                            System.out.println();
-                            d4.setIsCorrect(false);
-                            d6.setIsCorrect(false);
-                            break;
-                        }
-                        while (!d10.getIsCorrect() && d8.getIsCorrect()) {
-                            d10.roll();
-                            d10.printRoll();
-                            // Thread.sleep(1000);
-                            if (d10.getCurrentRoll() == d10.getSideNumber()) {
-                                d10.setIsCorrect(true);
-                            } else {
-                                System.out.println("Resetting rolls.");
-                                System.out.println();
-                                d4.setIsCorrect(false);
-                                d6.setIsCorrect(false);
-                                d8.setIsCorrect(false);
-                                break;
-                            }
-                            while (!d12.getIsCorrect() && d10.getIsCorrect()) {
-                                d12.roll();
-                                d12.printRoll();
-                                // Thread.sleep(1000);
-                                if (d12.getCurrentRoll() == d12.getSideNumber()) {
-                                    d12.setIsCorrect(true);
+        while (!d4.getIsCorrect() && !d6.getIsCorrect() && !d8.getIsCorrect() && !d10.getIsCorrect() && !d12.getIsCorrect() && !d20.getIsCorrect()) {
+            d4.roll();
+            d4.printRoll();
+            if (d4.getCurrentRoll() == d4.getSideNumber()) {
+                d4.setIsCorrect(true);
+                d6.roll();
+                d6.printRoll();
+                if (d6.getCurrentRoll() == d6.getSideNumber()) {
+                    d6.setIsCorrect(true);
+                    d8.roll();
+                    d8.printRoll();
+                    if (d8.getCurrentRoll() == d8.getSideNumber()) {
+                        d8.setIsCorrect(true);
+                        d10.roll();
+                        d10.printRoll();
+                        if (d10.getCurrentRoll() == d10.getSideNumber()) {
+                            d10.setIsCorrect(true);
+                            d12.roll();
+                            d12.printRoll();
+                            if (d12.getCurrentRoll() == d12.getSideNumber()) {
+                                d12.setIsCorrect(true);
+                                d20.roll();
+                                d20.printRoll();
+                                if (d20.getCurrentRoll() == d20.getSideNumber()) {
+                                    d20.setIsCorrect(true);
                                 } else {
-                                    System.out.println("Resetting rolls.");
-                                    System.out.println();
                                     d4.setIsCorrect(false);
                                     d6.setIsCorrect(false);
                                     d8.setIsCorrect(false);
                                     d10.setIsCorrect(false);
-                                    break;
+                                    d12.setIsCorrect(false);
+                                    continue;
                                 }
-                                while (!d20.getIsCorrect() && d12.getIsCorrect()) {
-                                    d20.roll();
-                                    d20.printRoll();
-                                    // Thread.sleep(1000);
-                                    if (d20.getCurrentRoll() == d20.getSideNumber()) {
-                                        d20.setIsCorrect(true);
-                                        System.out.println();
-                                        System.out.println("Congratulations, the game has been completed!");
-                                        System.out.println("Here are your statistics: ");
-                                        System.out.println("You rolled a d4 " + d4.getNumberOfTimesRolled() + " times.");
-                                        System.out.println("You rolled a d6 " + d6.getNumberOfTimesRolled() + " times.");
-                                        System.out.println("You rolled a d8 " + d8.getNumberOfTimesRolled() + " times.");
-                                        System.out.println("You rolled a d10 " + d10.getNumberOfTimesRolled() + " times.");
-                                        System.out.println("You rolled a d12 " + d12.getNumberOfTimesRolled() + " times.");
-                                        System.out.println("You rolled a d20 " + d20.getNumberOfTimesRolled() + " times.");
-                                        System.out.println();
-                                        System.out.println("You've rolled a total of " +
-                                                (d4.getNumberOfTimesRolled() + d6.getNumberOfTimesRolled()
-                                                        + d8.getNumberOfTimesRolled() + d10.getNumberOfTimesRolled() +
-                                                        d12.getNumberOfTimesRolled() + d20.getNumberOfTimesRolled()) + " dice.");
-                                    } else {
-                                        System.out.println("Resetting rolls.");
-                                        System.out.println();
-                                        d4.setIsCorrect(false);
-                                        d6.setIsCorrect(false);
-                                        d8.setIsCorrect(false);
-                                        d10.setIsCorrect(false);
-                                        d12.setIsCorrect(false);
-                                        break;
-                                    }
-                                }
+
+                            } else {
+                                d4.setIsCorrect(false);
+                                d6.setIsCorrect(false);
+                                d8.setIsCorrect(false);
+                                d10.setIsCorrect(false);
+                                continue;
+
                             }
+                        } else {
+                            d4.setIsCorrect(false);
+                            d6.setIsCorrect(false);
+                            d8.setIsCorrect(false);
+                            continue;
                         }
+                    } else {
+                        d4.setIsCorrect(false);
+                        d6.setIsCorrect(false);
+                        continue;
                     }
+                } else {
+                    System.out.println("Resetting rolls.");
+                    System.out.println();
+                    d4.setIsCorrect(false);
+                    continue;
                 }
             }
         }
+        System.out.println();
+        System.out.println("Congratulations, the game has been completed!");
+        System.out.println("Here are your statistics: ");
+        System.out.println("You rolled a d4 " + d4.getNumberOfTimesRolled() + " times.");
+        System.out.println("You rolled a d6 " + d6.getNumberOfTimesRolled() + " times.");
+        System.out.println("You rolled a d8 " + d8.getNumberOfTimesRolled() + " times.");
+        System.out.println("You rolled a d10 " + d10.getNumberOfTimesRolled() + " times.");
+        System.out.println("You rolled a d12 " + d12.getNumberOfTimesRolled() + " times.");
+        System.out.println("You rolled a d20 " + d20.getNumberOfTimesRolled() + " times.");
+        System.out.println();
+        System.out.println("You've rolled a total of " +
+                (d4.getNumberOfTimesRolled() + d6.getNumberOfTimesRolled()
+                        + d8.getNumberOfTimesRolled() + d10.getNumberOfTimesRolled() +
+                        d12.getNumberOfTimesRolled() + d20.getNumberOfTimesRolled()) + " dice.");
     }
 }
